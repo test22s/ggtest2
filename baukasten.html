@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaugummi Baukasten</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to top, rgb(44, 44, 44), black);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+header input {
+    padding: 10px;
+    width: 80%;
+    border: 1px solid rgb(197, 196, 196);
+    border-radius: 10px 0 0 10px;
+    font-size: 1rem;
+    background-color: #454444;
+    color: #fff;
+    border-right: none;
+}
+
+h1 {
+    margin-top: 5px;
+}
+
+.searchimg {
+    width: 20px;
+    height: 20px;
+    padding: 9.23px;
+    border: 1px solid rgb(197, 196, 196);
+    border-radius: 0 10px 10px 0;
+    background-color: #454444;
+    cursor: pointer;
+}
+
+header::placeholder {
+    color: rgb(203, 201, 201);
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+aside {
+    width: 300px;
+    border-right: 1px solid #333;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+aside h2 {
+    text-align: center;
+    color: #fff;
+    
+}
+
+.category {
+    margin-bottom: 20px;
+}
+
+.category h3 {
+    color: #aaa;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.ingredient {
+    padding: 10px;
+        margin: 10px 0;
+        border-radius: 10px;
+        cursor: grab;
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        color: #fff;
+        border: 1px solid #555;
+        transition: background-color 0.3s, transform 0.3s;
+}
+
+.ingredient summary {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ingredient .plus-sign {
+    font-size: 1.5rem;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.ingredient:active {
+    cursor: grabbing;
+}
+
+.ingredient.fruit {
+    background: rgba(83, 82, 82, 0.2) ;
+    backdrop-filter: blur(10px);
+    border: 0.6px solid rgba(94, 94, 94, 0.3) ;
+    border-radius: 10px;
+    
+}
+
+.ingredient.herb {
+    background: rgba(83, 82, 82, 0.2) ;
+    backdrop-filter: blur(10px);
+    border: 0.6px solid rgba(94, 94, 94, 0.3) ;
+    border-radius: 10px;
+}
+
+.ingredient.nootro {
+    background: rgba(83, 82, 82, 0.2) ;
+    backdrop-filter: blur(10px);
+    border: 0.6px solid rgba(94, 94, 94, 0.3) ;
+    border-radius: 10px;
+}
+
+.ingredient.adapto {
+    background: rgba(83, 82, 82, 0.2) ;
+    backdrop-filter: blur(10px);
+    border: 0.6px solid rgba(94, 94, 94, 0.3) ;
+    border-radius: 10px;
+}
+
+.ingredient.classic {
+    background: rgba(83, 82, 82, 0.2) ;
+    backdrop-filter: blur(10px);
+    border: 0.6px solid rgba(94, 94, 94, 0.3) ;
+    border-radius: 10px;
+}
+
+.ingredient:hover {
+    transform: scale(1.05);
+    border: 0.8px solid black;
+    box-shadow: 0 0 0 1.5px rgb(223, 223, 223);
+    border-radius: 10px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.base {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 200px;
+}
+
+.block {
+    padding: 20px;
+    background: rgba(100, 99, 99, 0.2) ;
+    backdrop-filter: blur(10px);
+    border: 0.6px solid rgba(94, 94, 94, 0.3) ;
+    border-radius: 10px;
+    border-radius: 10px;
+    color: #fff;
+    
+    margin-top: 20px;
+    width: 200px;
+    text-align: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.block:hover {
+    transform: scale(1.05);
+}
+
+.create-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background:none;
+    color: white;
+    font-weight: 700;
+    border: 2px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.create-button:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.05);
+}
+
+.details-panel {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    border: 1px solid #555;
+}
+
+.detailsimg{
+    height: 110px;
+    width: 110px;
+    margin: 10px;
+}
+
+.details-panel h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.details-panel #detailsContent {
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.ingredient .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.glintimg{
+    height: 35px;
+    width: 100px;
+    top: 40px;
+    left: 30px;
+    text-align: left;
+
+}
+.hhcontent{
+    display: flex;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+
+
+</style>
+<body>
+    <div class="container">
+        <header>
+            <div class="hhcontent">
+            <img src="images/logo.png" class="glintimg">
+            
+            </div>
+            <h1>Kaugummi Baukasten</h1>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Zutaten suchen...">
+                <img class="searchimg" src="search.png" alt="search icon">
+            </div>
+        </header>
+        <div class="content">
+            <aside>
+                <h2>Kategorien</h2>
+                <div class="category">
+                    <h3>Stimulanzien</h3>
+                    <div class="ingredient fruit" draggable="true" id="coffein" data-ingredient="Coffein">
+                        <img src="pill_icon.png" alt="Leaf Icon" class="icon">  <summary>Coffein <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient fruit" draggable="true" id="theobromin" data-ingredient="Theobromin">
+                        <img src="leaf_icon.png" alt="Leaf Icon" class="icon">  <summary>Theobromin <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient fruit" draggable="true" id="sidacardifolia" data-ingredient="Sida Cardifolia">
+                        <img src="leaf_icon.png" alt="Leaf Icon" class="icon"> <summary>Sida Cardifolia <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient fruit" draggable="true" id="guarana" data-ingredient="Guarana">
+                        <img src="leaf_icon.png" alt="Leaf Icon" class="icon"> <summary>Guarana <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient fruit" draggable="true" id="greentea" data-ingredient="Grüner Tee Extrakt">
+                        <img src="leaf_icon.png" alt="Leaf Icon" class="icon">  <summary>Grüner Tee Extrakt<span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient fruit" draggable="true" id="yohimbin" data-ingredient="Yohimbin">
+                        <img src="leaf_icon.png" alt="Leaf Icon" class="icon"> <summary>Yohimbin <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient fruit" draggable="true" id="synephrin" data-ingredient="Synephrin">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon"> <summary>Synephrin <span class="plus-sign">+</span></summary>
+                    </div>
+                </div>
+                <div class="category">
+                    <h3>Nootropika</h3>
+                    <div class="ingredient nootro" draggable="true" id="l-theanin" data-ingredient="L-Theanin">
+                        <img src="pill_icon.png" alt="Leaf Icon" class="icon">  <summary>L-Theanin <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient nootro" draggable="true" id="alpha-gpc" data-ingredient="Alpha-GPC">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon">  <summary>Glycerylphosphorylcholin <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient nootro" draggable="true" id="phosphatidylserin" data-ingredient="Phosphatidylserin">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon">  <summary>Phosphatidylserin <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient nootro" draggable="true" id="aniracetam" data-ingredient="Aniracetam">
+                        <img src="pill_icon.png" alt="Leaf Icon" class="icon">  <summary>Aniracetam<span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient nootro" draggable="true" id="piracetam" data-ingredient="Piracetam">
+                        <img src="pill_icon.png" alt="Leaf Icon" class="icon">  <summary>Piracetam <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient nootro" draggable="true" id="ginkgobiloba" data-ingredient="Ginkgo Biloba">
+                        <img src="leaf_icon.png" alt="Leaf Icon" class="icon">  <summary>Ginkgo Biloba Extrakt <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient nootro" draggable="true" id="cholin" data-ingredient="Cholin">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon">  <summary>Cholin <span class="plus-sign">+</span></summary>
+                    </div>
+                </div>
+                <div class="category">
+                    <h3>Adaptogene</h3>
+                    <div class="ingredient adapto" draggable="true" id="rhodiolarosea" data-ingredient="Rhodiola Rosea">
+                        <img src="leaf_icon.png" alt="Leaf Icon" class="icon">  <summary>Rhodiola Rosea <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient adapto" draggable="true" id="ashwaganda" data-ingredient="Ashwaganda">
+                        <img src="leaf_icon.png" alt="Leaf Icon" class="icon">  <summary>Ashwaganda <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient adapto" draggable="true" id="cordyceps" data-ingredient="Cordyceps">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon">  <summary>Cordyceps <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient adapto" draggable="true" id="astragalus" data-ingredient="Astragalus">
+                        <img src="leaf_icon.png" alt="Leaf Icon" class="icon">  <summary>Astragalus <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient adapto" draggable="true" id="reishipilz" data-ingredient="Reishi-Pilz">
+                        <img src="leaf_icon.png" alt="Leaf Icon" class="icon">  <summary>Reishi-Pilz Extrakt <span class="plus-sign">+</span></summary>
+                    </div>
+                </div>
+                <div class="category">
+                    <h3>Aminosäuren</h3>
+                    <div class="ingredient herb" draggable="true" id="mint" data-ingredient="Minze">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon">  <summary>Beta-Alanin <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient herb" draggable="true" id="mint" data-ingredient="Minze">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon">  <summary>Arginin <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient herb" draggable="true" id="mint" data-ingredient="Minze">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon"><summary>Taurin<span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient herb" draggable="true" id="mint" data-ingredient="Minze">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon"><summary>Tyrosin <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient herb" draggable="true" id="mint" data-ingredient="Minze">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon"><summary>Citrullin Malat <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient herb" draggable="true" id="mint" data-ingredient="Minze">
+                        <img src="test_tube_icon.png" alt="Leaf Icon" class="icon"><summary>BCAAs (Leucin, Isoleucin, Valin) <span class="plus-sign">+</span></summary>
+                    </div>
+                </div>
+                <div class="category">
+                    <h3>Kreatin</h3>
+                    <div class="ingredient classic" draggable="true" id="bubblegum" data-ingredient="Bubblegum">
+                        <img src="pill_icon.png" alt="Leaf Icon" class="icon">  <summary>Kreatin Monohydrat <span class="plus-sign">+</span></summary>
+                    </div>
+                    <div class="ingredient classic" draggable="true" id="bubblegum" data-ingredient="Bubblegum">
+                        <img src="pill_icon.png" alt="Leaf Icon" class="icon">  <summary>Kreatin HCL <span class="plus-sign">+</span></summary>
+                    </div>
+                </div>
+            </aside>
+            <main>
+                <div class="base" id="base">
+                    <h2>Dein Kaugummi Block</h2>
+                    <div class="block" id="block">Basis</div>
+                    <button class="create-button" id="createButton">Erstellen</button>
+                </div>
+                <div class="details-panel" id="detailsPanel">
+                    <img src="coffein.png" class="detailsimg">
+                    <div id="detailsContent">Bewege den Mauszeiger über eine Zutat, um Details zu sehen.</div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search');
+            const ingredients = document.querySelectorAll('.ingredient');
+            const block = document.getElementById('block');
+            const detailsContent = document.getElementById('detailsContent');
+            const createButton = document.getElementById('createButton');
+
+            // Event listener for search functionality
+            searchInput.addEventListener('input', function() {
+                const filter = this.value.toLowerCase();
+                ingredients.forEach(ingredient => {
+                    const text = ingredient.textContent.toLowerCase();
+                    if (text.includes(filter)) {
+                        ingredient.style.display = '';
+                    } else {
+                        ingredient.style.display = 'none';
+                    }
+                });
+            });
+
+            // Event listener to add ingredients to block
+            ingredients.forEach(ingredient => {
+                ingredient.addEventListener('dragstart', dragStart);
+                const plusSign = ingredient.querySelector('.plus-sign');
+                if (plusSign) {
+                    plusSign.addEventListener('click', () => addToBlock(ingredient));
+                }
+                ingredient.addEventListener('mouseover', () => showDetails(ingredient));
+                ingredient.addEventListener('mouseout', clearDetails);
+            });
+
+            block.addEventListener('dragover', dragOver);
+            block.addEventListener('drop', drop);
+
+            function dragStart(e) {
+                e.dataTransfer.setData('text/plain', e.target.id);
+                setTimeout(() => {
+                    e.target.classList.add('hide');
+                }, 0);
+            }
+
+            function dragOver(e) {
+                e.preventDefault();
+            }
+
+            function drop(e) {
+                e.preventDefault();
+                const id = e.dataTransfer.getData('text/plain');
+                const draggable = document.getElementById(id);
+                draggable.classList.remove('hide');
+                addToBlock(draggable);
+            }
+
+            function addToBlock(ingredient) {
+                const clone = ingredient.cloneNode(true);
+                clone.classList.add('dropped');
+                clone.style.border = '1.1px solid #fff'; 
+                block.appendChild(clone);
+
+                // Animation for adding ingredients
+                clone.style.transform = 'scale(0.5)';
+                setTimeout(() => {
+                    clone.style.transform = 'scale(1)';
+                    clone.style.transition = 'transform 0.3s';
+                }, 0);
+            }
+
+            function showDetails(ingredient) {
+                const ingredientName = ingredient.querySelector('summary').textContent.trim();
+                detailsContent.textContent = 'Details für ${ingredientName}';
+            }
+
+
+
+
+            function showDetails(ingredient) {
+                const ingredientName = ingredient.dataset.ingredient;
+                let detailsText;
+
+                switch (ingredientName) {
+                    case 'Coffein':
+                        detailsText = 'Coffein ist ein Stimulans, das Müdigkeit bekämpft und die Konzentration verbessert.';
+                        break;
+                    case 'Theobromin':
+                        detailsText = 'Theobromin ist ein mildes Stimulans, das in Schokolade vorkommt und die Stimmung hebt.';
+                        break;
+                    case 'Sida Cardifolia':
+                        detailsText = 'Sida Cardifolia ist eine Pflanze, die traditionell zur Erhöhung der Energie und Ausdauer verwendet wird.';
+                        break;
+                    case 'Guarana':
+                        detailsText = 'Guarana ist eine Pflanze, die reich an Coffein ist und zur Steigerung der Wachsamkeit genutzt wird.';
+                        break;
+                    case 'Grüner Tee Extrakt':
+                        detailsText = 'Grüner Tee Extrakt enthält Antioxidantien und kann den Stoffwechsel anregen.';
+                        break;
+                    case 'Beta-Alanin':
+                        detailsText = 'Beta-Alanin ist eine Aminosäure, die die sportliche Leistung und Ausdauer verbessern kann.';
+                        break;
+                    case 'Arginin':
+                        detailsText = 'Arginin ist eine Aminosäure, die die Durchblutung und die Proteinsynthese unterstützt.';
+                        break;
+                    case 'Taurin':
+                        detailsText = 'Taurin ist eine Aminosäure, die für die Herzgesundheit und die sportliche Leistung wichtig ist.';
+                        break;
+                    case 'Tyrosin':
+                        detailsText = 'Tyrosin ist eine Aminosäure, die die kognitive Funktion und die Stressresistenz verbessern kann.';
+                        break;
+                    case 'Citrullin Malat':
+                        detailsText = 'Citrullin Malat ist eine Aminosäure, die die Durchblutung und die Ausdauer fördern kann.';
+                        break;
+                    case 'BCAAs (Leucin, Isoleucin, Valin)':
+                        detailsText = 'BCAAs sind essentielle Aminosäuren, die den Muskelaufbau und die Regeneration unterstützen.';
+                        break;
+                    case 'Kreatin Monohydrat':
+                        detailsText = 'Kreatin Monohydrat ist ein beliebtes Supplement zur Steigerung der Muskelkraft und -masse.';
+                        break;
+                    case 'Kreatin HCL':
+                        detailsText = 'Kreatin HCL ist eine gut lösliche Form von Kreatin, die die Muskelkraft und Ausdauer steigern kann.';
+                        break;
+                    default:
+                        detailsText = 'Keine Details verfügbar.';
+                        break;
+                        
+                }
+
+                detailsContent.innerHTML = `<h3>${ingredientName}</h3><p>${detailsText}</p>`;
+            }
+
+            function clearDetails() {
+                detailsContent.innerHTML = 'Bewege den Mauszeiger über eine Zutat, um Details zu sehen.';
+            }
+
+
+
+
+
+            function clearDetails() {
+                detailsContent.textContent = 'Bewege den Mauszeiger über eine Zutat, um Details zu sehen.';
+            }
+
+            createButton.addEventListener('click', () => {
+                // Animation for transforming block into gum pack
+                block.style.transform = 'scale(0)';
+                setTimeout(() => {
+                    block.textContent = 'Kaugummipackung';
+                    block.style.transform = 'scale(1)';
+                    block.style.transition = 'transform 0.5s';
+                }, 500);
+                // Redirect to next page
+                setTimeout(() => {
+                    window.location.href = 'next_page.html'; // replace with your next page URL
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
